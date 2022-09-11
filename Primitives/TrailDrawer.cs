@@ -5,7 +5,7 @@ using Terraria.Graphics.Shaders;
 using Terraria;
 using Terraria.Graphics;
 
-namespace DarkValley.Primitives
+namespace OriginHeavenMod.Primitives
 {
 	// Token: 0x02000643 RID: 1603
 	public struct TrailDrawer
