@@ -11,7 +11,7 @@ namespace DarkValley.Primitives
 	public struct TrailDrawer
 	{
 		// Token: 0x060033C1 RID: 13249 RVA: 0x0061AC98 File Offset: 0x00618E98
-		public void Draw(Projectile proj)
+		public void Draw(Projectile proj)//Copy this along with StripColors() and StripWidth() and add it to your disired entity(NPC/Projectile) in PreDraw()
 		{
 			float num = proj.ai[1];
 			MiscShaderData miscShaderData = GameShaders.Misc["FlameLash"];
