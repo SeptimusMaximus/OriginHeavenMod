@@ -8,10 +8,10 @@ using System;
 using System.IO;
 using Terraria.UI;
 using System.Collections.Generic;
-using DarkValley.Titles;
+using OrginHeavenMod.Titles;
 using ReLogic.Graphics;
 
-namespace DarkValley
+namespace OrginHeavenMod
 {
 	public class TitleSystem : ModSystem
 	{
@@ -38,50 +38,11 @@ namespace DarkValley
             switch (BossID)
             {
                 case 0:
-                    BossName = "Mogwai";
-                    BossTitle = "Duskwood Servitor";
-                    titleColor = Color.Purple;
+                    BossName = "BossName";
+                    BossTitle = "BossTitle";
+                    titleColor = Color.White;
                     break;
-                case 1:
-                    BossName = "Wyrmwood";
-                    BossTitle = "Necrophagic Parasite";
-                    titleColor = Color.Red;
-                    break;
-                case 2:
-                    BossName = "Chronoroot";
-                    BossTitle = "Temporal Keeper";
-                    titleColor = Color.GreenYellow;
-                    break;
-                case 3:
-                    BossName = "Lazo";
-                    BossTitle = "Kindled Warden";
-                    titleColor = Color.Gold;
-                    break;
-                case 4:
-                    BossName = "Equinox Magus";
-                    BossTitle = "Grand Spirit";
-                    titleColor = Color.Lerp(Color.Pink, Color.Blue, (float)Math.Sin(30));
-                    break;
-                case 5:
-                    BossName = "Aquarius";
-                    BossTitle = "Trench Warden";
-                    titleColor = Color.Blue;
-                    break;
-                case 6:
-                    BossName = "Leopard";
-                    BossTitle = "Loyal Assistant";
-                    titleColor = Color.Yellow;
-                    break;
-                case 7:
-                    BossName = "Niumowang";
-                    BossTitle = "Demon King";
-                    titleColor = Color.Lerp(Color.Purple, Color.Magenta, (float)Math.Sin(30));
-                    break;
-                case 8:
-                    BossName = "The Misinfortunates";
-                    BossTitle = "Double Trouble";
-                    titleColor = Color.Lerp(Color.Orange, Color.Red, (float)Math.Sin(30));
-                    break;
+                
             }
             Vector2 textSize = FontAssets.DeathText.Value.MeasureString(BossName);
             Vector2 textSize2 = FontAssets.DeathText.Value.MeasureString(BossTitle) * 0.35f;
