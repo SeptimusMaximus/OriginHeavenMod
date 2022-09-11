@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.Graphics;
 
-namespace DarkValley.Primitives
+namespace OriginHeavenMod.Primitives
 {
     [StructLayout(LayoutKind.Sequential, Size = 1)]
     public struct TestRainbowTrail
