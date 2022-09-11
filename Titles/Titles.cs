@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace DarkValley.Titles
+namespace OriginHeavenMod.Titles
 {
     public class Titles : ModPlayer
     {
@@ -32,7 +32,7 @@ namespace DarkValley.Titles
     }
     public class Title : ModProjectile
     {
-        public override string Texture => "DarkValley/Blank";
+        public override string Texture => "OriginHeavenMod/Blank";
 
         public override void SetDefaults()
         {
