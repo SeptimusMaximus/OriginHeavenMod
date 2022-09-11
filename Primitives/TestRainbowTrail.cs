@@ -12,7 +12,7 @@ namespace OriginHeavenMod.Primitives
     {
         private static VertexStrip _vertexStrip = new VertexStrip();
 
-        public void Draw(Projectile proj)
+        public void Draw(Projectile proj)//Copy this along with StripColors() and StripWidth() and add it to your disired entity(NPC/Projectile) in PreDraw()
         {
             MiscShaderData miscShaderData = GameShaders.Misc["RainbowRod"];
             miscShaderData.UseSaturation(-2.8f);
