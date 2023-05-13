@@ -6,6 +6,8 @@ using OriginHeavenMod;
 using OriginHeavenMod.Content.Bosses.SpiritDaoist.Projectiles;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.Graphics;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -22,7 +24,8 @@ namespace OriginHeavenMod.Content.Bosses.SpiritDaoist
 			SpiritLeaves,
 			SunBeam,
 			SpawnShield,
-			TreeRootSpikes
+			TreeRootSpikes,
+			SuperSimpleCharge
         }
 
 		private ref float State => ref NPC.ai[0];
@@ -99,6 +102,12 @@ namespace OriginHeavenMod.Content.Bosses.SpiritDaoist
 				case SpiritAttackState.SpiritLeaves:
 					SpiritLeaves();
 					break;
+				case SpiritAttackState.SunBeam:
+					SunBeams();
+					break;
+				case SpiritAttackState.SuperSimpleCharge:
+					SuperSimpleCharge();
+					break;
             }
 		}
 
@@ -135,7 +144,7 @@ namespace OriginHeavenMod.Content.Bosses.SpiritDaoist
 			
 			if (Timer > 325f)
             {
-				State = (float)SpiritAttackState.SunBeam;
+				State = (float)SpiritAttackState.SuperSimpleCharge;
 				Timer = 0f;
 				NPC.netUpdate = true;
             }
@@ -146,6 +155,42 @@ namespace OriginHeavenMod.Content.Bosses.SpiritDaoist
         {
 
         }
+
+		private void SuperSimpleCharge()
+		{
+			Player target = Main.player[NPC.target];
+			if (Timer == 1f)
+			{
+				switch (Main.rand.Next(0, 2))
+				{
+					case 0:
+						NPC.spriteDirection = -1;
+						NPC.Teleport(target.position + new Vector2(600, 0), 1);
+						break;
+					case 1:
+                        NPC.spriteDirection = 1;
+                        NPC.Teleport(target.position + new Vector2(-600, 0), 1);
+                        break;
+				}
+
+                NPC.velocity = NPC.Center.DirectionTo(target.Center) * 14;
+
+            }
+
+            if (Timer > 60f)
+			{
+				NPC.velocity *= 0.99f;
+				if (Timer > 70f)
+				{
+					NPC.velocity *= 0;
+					Timer = 0f;
+					NPC.netUpdate = true;
+					State = (float)SpiritAttackState.SpiritLeaves;
+				}
+			}
+			
+
+		}
 
 		// This method is for teleporting around the player.
 		private void WarpAroundPlayer()
@@ -211,6 +256,40 @@ namespace OriginHeavenMod.Content.Bosses.SpiritDaoist
         public override void OnKill()
         {
             
+        }
+
+
+		// trail stuff (feel free to remove) -maxie
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            GraphicsDevice graphicsDevice = Main.graphics.GraphicsDevice;
+            RasterizerState save = graphicsDevice.RasterizerState;
+            graphicsDevice.RasterizerState = RasterizerState.CullNone;
+            VertexStrip vertexStrip = new();
+            MiscShaderData miscShaderData = GameShaders.Misc["RainbowRod"];
+            miscShaderData.UseSaturation(-2.8f);
+            miscShaderData.UseOpacity(6f);
+            miscShaderData.Apply();
+            vertexStrip.PrepareStripWithProceduralPadding(NPC.oldPos, NPC.oldRot, TrailColor, StripWidth, -Main.screenPosition + NPC.Size / 2f);
+            vertexStrip.DrawTrail();
+            Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+            graphicsDevice.RasterizerState = save;
+            return true;
+		}
+
+        private Color TrailColor(float progressOnStrip)
+        {
+            Color result = Color.Lerp(Color.Blue, Color.Pink, Utils.GetLerpValue(0f, 0.7f, progressOnStrip, clamped: true)) * (1f - Utils.GetLerpValue(0f, 0.98f, progressOnStrip, clamped: true));
+            result.A = 0;
+            return result;
+        }
+
+        private float StripWidth(float progressOnStrip)
+        {
+            float num = 1f;
+            float lerpValue = Utils.GetLerpValue(0f, 0.2f, progressOnStrip, clamped: true);
+            num *= 1f - (1f - lerpValue) * (1f - lerpValue);
+            return MathHelper.Lerp(0f, 50f, num);
         }
     }
 }

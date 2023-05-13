@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.GameContent;
@@ -12,6 +13,7 @@ namespace OriginHeavenMod.Content.Bosses.SpiritDaoist.Projectiles
     {
         private const float MaxCharge = 50f;
         private const float MoveDistance = 60f;
+        static Texture2D SunBeamTexture;
         
         public float Charge
         {
@@ -25,13 +27,17 @@ namespace OriginHeavenMod.Content.Bosses.SpiritDaoist.Projectiles
             set => Projectile.ai[0] = value;
         }
 
-        public bool IsAtMaxCharge => Charge == MaxCharge;
+        public bool IsAtMaxCharge => Charge > MaxCharge;
 
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.DrawScreenCheckFluff[Type] = 2400;
         }
 
+        public override void Load()
+        {
+            SunBeamTexture = ModContent.Request<Texture2D>("OriginHeavenMod/Content/Bosses/SpiritDaoist/Projectiles/SunBeam", AssetRequestMode.ImmediateLoad).Value;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 16;
@@ -42,16 +48,21 @@ namespace OriginHeavenMod.Content.Bosses.SpiritDaoist.Projectiles
             Projectile.hide = true;
         }
 
+        public override void AI()
+        {
+            Charge++;
+        }
+
         public override bool PreDraw(ref Color lightColor)
         {
             if (IsAtMaxCharge)
             {
-                // Fix this.
-                //DrawLaser(spriteBatch, TextureAssets.Projectile, Main.player[Projectile.owner].Center,
-                //    Projectile.velocity, 10, Projectile.damage, -1.57f, 1f, 1000f, Color.White, (int)MoveDistance);
+               DrawLaser(Main.spriteBatch, SunBeamTexture, Main.player[Projectile.owner].Center,
+                   Projectile.velocity, 10, Projectile.damage, -1.57f, 1f, 1000f, Color.White, (int)MoveDistance);
             }
             return false;
         }
+
 
         public void DrawLaser(SpriteBatch spriteBatch, Texture2D texture, Vector2 start, Vector2 unit, float step, int damage, float rotation = 0f, float scale = 1f, float maxDist = 2000f, Color color = default(Color), int transDist = 50)
         {
