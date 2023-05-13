@@ -1,3 +1,0 @@
-displayName = Origin Heaven
-author = Modestep
-version = 0.1
