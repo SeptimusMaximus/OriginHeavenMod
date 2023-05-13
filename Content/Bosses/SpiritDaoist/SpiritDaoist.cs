@@ -79,11 +79,11 @@ namespace OriginHeavenMod.Content.Bosses.SpiritDaoist
 		public override void AI()
 		{
 			// Spawn the title on the player's screen.
-			if (!TitleSpawned)
-			{
-				TitleSystem.ShowTitle(NPC, 4);
-				TitleSpawned = true;
-			}
+			//if (!TitleSpawned)
+			//{
+			//	TitleSystem.ShowTitle(NPC, 4);
+			//	TitleSpawned = true;
+			//}
 
 			// Make the boss be able to target the closest player if in multiplayer.
             NPC.TargetClosest();

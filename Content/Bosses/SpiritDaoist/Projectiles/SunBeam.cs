@@ -6,7 +6,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace OriginHeavenMod.NPCs.Bosses.SpiritDaoist.Projectiles
+namespace OriginHeavenMod.Content.Bosses.SpiritDaoist.Projectiles
 {
     public class SunBeam : ModProjectile
     {
