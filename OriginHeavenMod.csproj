@@ -12,8 +12,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\" />
+    <None Remove="Content\Items\" />
+    <None Remove="Content\Items\SpiritDaoist\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
+    <Folder Include="Content\Items\" />
+    <Folder Include="Content\Items\SpiritDaoist\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,24 @@
+NPCs.SpiritDaoist.DisplayName: Spirit Daoist
+
+Projectiles: {
+	SpiritLeaf.DisplayName: Spirit Leaf
+	SunBeam.DisplayName: Sun Beam
+	SpiritLeafSword_Projectile.DisplayName: Spirit Leaf Sword_ Projectile
+}
+
+Items: {
+	WoodEssenceShield: {
+		Tooltip: ""
+		DisplayName: Wood Essence Shield
+	}
+
+	SpiritLeafSword: {
+		Tooltip:
+			'''
+					Ignores 5 points of enemy defense.
+					It is imbued with a mystical spirit of nature.
+
+			'''
+		DisplayName: Spirit Leaf Sword
+	}
+}

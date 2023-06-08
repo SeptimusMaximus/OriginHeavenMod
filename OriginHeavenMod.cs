@@ -4,5 +4,6 @@ namespace OriginHeavenMod
 {
 	public class OriginHeavenMod : Mod
 	{
+
 	}
 }
